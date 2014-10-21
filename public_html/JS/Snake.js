@@ -43,7 +43,7 @@ function gameDraw() {
 
 function snakeInitalize() {
     snake = [];
-    snakeLength = 5;
+    snakeLength = 1;
     snakeSize = 20;
     snakeDirection = "Down";
     
@@ -65,6 +65,9 @@ function snakeDraw() {
 function snakeUpdate() {
     var snakeHeadX = snake[0].x;
     var snakeHeadY = snake[0].y;
+    
+    checkFoodCollisions(snakeHeadX, snakeHeadY);
+    checkWallCollisions(snakeHeadX, snakeHeadY);
     
     if(snakeDirection == "Down") {
         snakeHeadY++;
@@ -96,17 +99,55 @@ function foodInitalize() {
 
 function foodDraw(){
     context.fillStyle = "rgb(39, 93, 156)";
-    context.fillRect(food.x, food.y, snakeSize, snakeSize);
+    context.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
 }
 
 function setFoodposition(){
     var randomX = Math.floor(Math.random() * screenWidth);
     var randomY = Math.floor(Math.random() * screenHeight);
     
-    food.x = randomX;
-    food.y = randomY;
+    food.x = Math.floor(randomX / snakeSize);
+    food.y = Math.floor(randomY / snakeSize);
 }
 
 function keyboardHandler(event){
     console.log(event);
+    
+    if(event.keyCode == "68" && snakeDirection != "Left"){
+        snakeDirection = "Right"
+    }
+    
+    if(event.keyCode == "65" && snakeDirection != "Right"){
+        snakeDirection = "Left"
+    }
+    
+    if(event.keyCode == "87" && snakeDirection != "Down"){
+        snakeDirection = "Up"
+    }
+    
+    if(event.keyCode == "83" && snakeDirection != "Up"){
+        snakeDirection = "Down"
+    }
+}
+
+function checkFoodCollisions(snakeHeadX, snakeHeadY) {
+    if(snakeHeadX == food.x && snakeHeadY == food.y) {
+        snake.push( {
+            x: 0,
+            y: 0
+        }); 
+        snakeLength++;
+        
+        var randomX = Math.floor(Math.random() * screenWidth);
+    var randomY = Math.floor(Math.random() * screenHeight);
+    
+    food.x = Math.floor(randomX / snakeSize);
+    food.y = Math.floor(randomY / snakeSize);
+    }
+}
+
+function checkWallCollisions(snakeHeadX, snakeHeadY){
+    if(snakeHeadX * snakeSize >= screenWidth ||  snakeHeadX * snakeSize < 0){
+        
+    }
 }
