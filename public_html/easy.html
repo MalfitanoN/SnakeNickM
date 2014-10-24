@@ -1,3 +1,14 @@
+
+<html>
+    <head>
+        <title>Snake-Easy</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        <canvas id="game-screen" width="800" height="500" style="border:3px solid #123456;"></canvas>
+        <script id="easy" type="text/javascript"> 
 var Snake;
 var snakeLength;
 var snakeSize;
@@ -12,7 +23,7 @@ var screenHeight;
 gameInitialize();
 snakeInitalize();
 foodInitalize();
-setInterval(gameLoop, 1000/30);
+setInterval(gameLoop, 50);
 
 function gameInitialize() {
     var canvas = document.getElementById("game-screen");
@@ -20,9 +31,6 @@ function gameInitialize() {
     
     screenWidth = 800;
     screenHeight = 500;
-    
-    canvas.width = screenWidth;
-    canvas.height = screenHeight;
    
     document.addEventListener("keydown", keyboardHandler);
 }
@@ -45,7 +53,7 @@ function gameDraw() {
 function snakeInitalize() {
     snake = [];
     snakeLength = 1;
-    snakeSize = 20;
+    snakeSize = 17;
     snakeDirection = "Down";
     
     for(var index = snakeLength - 1; index >= 0; index--) {
@@ -152,7 +160,6 @@ function checkWallCollisions(snakeHeadX, snakeHeadY){
         
     }
 }
-
-
-    
-
+</script>
+    </body>
+</html>
