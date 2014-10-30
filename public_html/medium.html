@@ -19,6 +19,8 @@ var context;
 var screenWidth;
 var screenHeight;
 
+var gameState;
+
 gameInitialize();
 snakeInitalize();
 foodInitalize();
@@ -80,13 +82,13 @@ function snakeUpdate() {
     if(snakeDirection == "Down") {
         snakeHeadY++;
     }
-    if(snakeDirection == "Up") {
+    else if(snakeDirection == "Up") {
         snakeHeadY--;
     }
-    if(snakeDirection == "Right") {
+    else if(snakeDirection == "Right") {
         snakeHeadX++;
     }
-    if(snakeDirection == "Left") {
+    else if(snakeDirection == "Left") {
         snakeHeadX--;
     }
     

@@ -1,29 +1,25 @@
 body{
-    margin: 0;
-    padding: 0;
+    margin-left: 280px;
+    margin-top: 80px;
+    background-color:#2a6496
+}
+
+#index{
+    margin: 0px;
+    background-image: url("../PicS/Background.jpg");
 }
 
 #game-screen{
     display: block;
 }
 
-h1{
-    color: white;
+.jumbotron {
     text-align: center;
     text-shadow: 4px 4px 4px #123456;
-   
 }
 
-h2{
-    text-align: center;
+#gameOver {
+    position: absolute;
+    visibility: hidden;
+
 }
-
-div{
-    text-align: center;
-}
-
-.body1{
-    background-image: url("../PicS/Background.jpg")
-}
-
-
