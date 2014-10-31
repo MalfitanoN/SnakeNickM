@@ -8,12 +8,16 @@
         <link rel="stylesheet" type="text/css" href="CSS/Style.css">
     </head>
     <body>
+        <section id="PLAYHUD">
+            <h2 id="scoreboard"></h2>
+        </section>
         <canvas id="game-screen" width="800" height="500" style="border:3px solid #123456"></canvas>
         <section  id="gameOver">
             <h1 class="title">GAME OVER</h1>
             <h2 id="restartButton">PLAY AGAIN</h2>
         </section>
         <script type="text/javascript">
+//all universal vars for the snake
             var snake;
             var snakeLength;
             var snakeSize;
@@ -27,11 +31,20 @@
 
             var gameState;
             var gameOverMenu;
+            var restartButton;
+            var scoreBoard;
 
+// initializing the game by calling the functions
             gameInitialize();
             snakeInitalize();
             foodInitalize();
             setInterval(gameLoop, 50);
+
+/*------------------------------------------------------------------------------------------------------
+ * GAME FUNCTONS
+ * -----------------------------------------------------------------------------------------------------
+ */
+
 
             function gameInitialize() {
                 var canvas = document.getElementById("game-screen");
@@ -43,12 +56,18 @@
                 document.addEventListener("keydown", keyboardHandler);
 
                 gameOverMenu = document.getElementById("gameOver");
+                centerMenuPosition(gameOverMenu);
+                restartButton = document.getElementById("restartButton");
+                scoreBoard = document.getElementById("scoreboard");
+
+                restartButton.addEventListener("click", gameRestart);
 
                 setState("PLAY");
             }
 
             function gameLoop() {
                 gameDraw();
+                drawScoreBoard();
                 if (gameState == "PLAY") {
                     snakeUpdate();
                     snakeDraw();
@@ -62,9 +81,19 @@
 
             }
 
+            function gameRestart() {
+                snakeInitalize();
+                foodInitalize();
+                hideMenu(gameOverMenu);
+                setState("PLAY");
+            }
+/*------------------------------------------------------------------------------------------------------
+ * SNAKE FUNCTIONS
+ * -----------------------------------------------------------------------------------------------------
+ */
             function snakeInitalize() {
                 snake = [];
-                snakeLength = 1;
+                snakeLength = 5;
                 snakeSize = 17;
                 snakeDirection = "Down";
 
@@ -89,6 +118,7 @@
 
                 checkFoodCollisions(snakeHeadX, snakeHeadY);
                 checkWallCollisions(snakeHeadX, snakeHeadY);
+                checkSnakeCollisions(snakeHeadX, snakeHeadY);
 
                 if (snakeDirection == "Down") {
                     snakeHeadY++;
@@ -109,6 +139,10 @@
 
                 snake.unshift(snakeTail);
             }
+/*------------------------------------------------------------------------------------------------------
+ * FOOD FUNCTION & KEYBOARD FUNCTIONS
+ * -----------------------------------------------------------------------------------------------------
+ */
 
             function foodInitalize() {
                 food = {
@@ -134,6 +168,7 @@
             function keyboardHandler(event) {
                 console.log(event);
 
+// WASD keys to control the snake
                 if (event.keyCode == "68" && snakeDirection != "Left") {
                     snakeDirection = "Right"
                 }
@@ -150,7 +185,7 @@
                     snakeDirection = "Down"
                 }
 
-
+//the the arrow keys to control the snake
                 if (event.keyCode == "39" && snakeDirection != "Left") {
                     snakeDirection = "Right"
                 }
@@ -195,9 +230,17 @@
             }
 
             function checkSnakeCollisions(snakeHeadX, snakeHeadY) {
-
+                for (var index = 1; index < snake.length; index++) {
+                    if (snakeHeadX == snake[index].x && snakeHeadY == snake[index].y) {
+                        setState("GAME OVER");
+                        return;
+                    }
+                }
             }
-
+/*------------------------------------------------------------------------------------------------------
+ * MENU FUNCTIONS
+ * -----------------------------------------------------------------------------------------------------
+ */
             function setState(state) {
                 gameState = state;
                 showMenu(state);
@@ -207,11 +250,24 @@
                 menu.style.visibility = "visible";
             }
 
+            function hideMenu(menu) {
+                menu.style.visibility = "hidden";
+            }
+
             function showMenu(state) {
                 if (state == "GAME OVER") {
                     displayMenu(gameOverMenu);
                 }
             }
-        </script>
+
+            function centerMenuPosition(menu) {
+                menu.style.top = (screenHeight / 2) - (menu.offsetHeight / 2) + "px";
+                menu.style.left = (screenWidth / 2) - (menu.offsetWidth / 2) + "px";
+            }
+
+            function drawScoreBoard() {
+                scoreBoard.innerHTML = "SCORE: " + snakeLength;
+            }
+      </script>
     </body>
 </html>
