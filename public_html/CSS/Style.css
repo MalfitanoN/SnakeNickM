@@ -24,7 +24,7 @@ body{
 
 }
 
-h1,  h2 {
+h1, h2, h3 {
     font-family: 'Ceviche One', cursive;
 }
 h2{
@@ -60,3 +60,9 @@ h2{
     margin-top: 0px;
     position: absolute;
 }
+
+h3{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
