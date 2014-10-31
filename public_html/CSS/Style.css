@@ -1,37 +1,45 @@
+/*canvas centering stuff*/
 body{
     margin-left: 280px;
     margin-top: 80px;
     background-color:#2a6496
 }
 
+/*Back Ground image and no margin on starting page */
 #index{
     margin: 0px;
     background-image: url("../PicS/Background.jpg");
 }
 
+/*canvas*/
 #game-screen{
     display: block;
 }
-
+/*text*/
 .jumbotron {
     text-align: center;
     text-shadow: 4px 4px 4px #123456;
 }
 
+/*game over menu*/
 #gameOver {
     position: absolute;
     visibility: hidden;
 
 }
 
+/*title  sub title text font*/
 h1, h2, h3 {
     font-family: 'Ceviche One', cursive;
 }
+
+/*only h2 color and font size*/
 h2{
     color: #123456;
     font-size: 40px;
 }
 
+/*Title on start screen*/
 .title{
     font-size: 75px;
     margin-bottom: 0px;
@@ -41,6 +49,7 @@ h2{
     margin-top: 340px;
 }
 
+/*Restart Button for game over*/
 #restartButton{
     text-align: center;
     font-size: 40px;
@@ -51,16 +60,19 @@ h2{
     margin-left: 657px;
 }
 
+/*hover and color for restart button*/
 #restartButton:hover{
     background-color: #357ebd ;
 }
 
+/*score board stuff*/
 #scoreboard{
     margin-left: 10px;
     margin-top: 0px;
     position: absolute;
 }
 
+/*h3 margin for text*/
 h3{
     margin-top: 0px;
     margin-bottom: 0px;
