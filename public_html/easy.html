@@ -109,6 +109,8 @@
                 for (var index = 0; index < snake.length; index++) {
                     context.fillStyle = "rgb(39, 93, 156)";
                     context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
+                    context.fillStyle = "black";
+                    context.strokeRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
                 }
             }
 
@@ -155,6 +157,8 @@
             function foodDraw() {
                 context.fillStyle = "rgb(39, 93, 156)";
                 context.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
+                context.fillStyle = "black";
+                context.strokeRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
             }
 
             function setFoodposition() {
